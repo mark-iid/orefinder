@@ -1,7 +1,8 @@
 # Orefinder Plugin
 
 Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items.
-Orefinder forked from https://www.curseforge.com/minecraft/bukkit-plugins/orefinder-bukkit which appears to have been abandoned.
+
+Orefinder was forked from https://www.curseforge.com/minecraft/bukkit-plugins/orefinder-bukkit which appears to have been abandoned.
 
 ## Features
 
