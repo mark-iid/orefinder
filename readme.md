@@ -1,24 +1,25 @@
 # Orefinder Plugin
 
-Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based messages when they interact with blocks while holding specific items.
+Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items.
+Orefinder forked from https://www.curseforge.com/minecraft/bukkit-plugins/orefinder-bukkit which appears to have been abandoned.
 
 ## Features
 
 - Detects the distance to the nearest specified ore block.
-- Sends distance-based messages to the player.
-- Includes a block stealing functionality with a configurable chance.
+- Sends distance-based clues in the form of messages to the player.
+- Includes an optional block stealing functionality with a configurable chance.
 
 ## Requirements
 
 - Minecraft server with Bukkit/Spigot/Paper
-- Java 8 or higher
+- Java 21 or higher
 - Maven
 
 ## Installation
 
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/mark-iid/orefinder.git
     cd orefinder
     ```
 
@@ -39,7 +40,7 @@ The plugin provides a configuration file `config.yml` where you can customize va
 
 1. Ensure you have the necessary permissions (`orefinder.use`) to use the plugin.
 2. Hold a specified item (e.g., diamond) in your main hand.
-3. Interact with blocks to receive distance-based messages about nearby ores.
+3. Hit any block to receive distance-based clues about nearby ores.
 
 ## Commands
 
@@ -53,7 +54,7 @@ No commands are provided by this plugin.
 
 ### Prerequisites
 
-- Java 8 or higher
+- Java 21 or higher
 - Maven
 
 ### Running Tests

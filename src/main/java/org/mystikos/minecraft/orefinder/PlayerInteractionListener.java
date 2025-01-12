@@ -13,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Random;
@@ -44,7 +43,7 @@ class PlayerInteractionListener implements Listener {
      * @param stid The block type to search for.
      * @return The distance to the nearest block of the specified type, or -1 if not found.
      */
-    public int getBlockTypeDistance(@NotNull Location loc, String stid) {
+    public int getBlockTypeDistance(Location loc, String stid) {
         World world = loc.getWorld();
         if (world == null) return -1;
 
@@ -95,7 +94,7 @@ class PlayerInteractionListener implements Listener {
      * @param event The PlayerQuitEvent.
      */
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerQuitEvent(@NotNull PlayerQuitEvent event) {
+    public void onPlayerQuitEvent(PlayerQuitEvent event) {
         pcdm.delRecord(event.getPlayer().getEntityId());
     }
 
@@ -105,7 +104,7 @@ class PlayerInteractionListener implements Listener {
      * @param event The PlayerInteractEvent.
      */
     @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerInteract(@NotNull PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("orefinder.use")) {
             ItemStack holding = player.getInventory().getItemInMainHand();
@@ -129,7 +128,7 @@ class PlayerInteractionListener implements Listener {
      * @param distance The distance to the nearest block of the specified type.
      */
     private void sendDistanceMessage(Player player, int distance) {
-        String message = null;
+        String message;
         if (distance == -1) {
             message = plugin.getConfig().getString("text.very_cold");
             sendMessage(player, message, ChatColor.BLUE);
