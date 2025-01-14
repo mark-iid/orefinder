@@ -7,7 +7,7 @@
     <version>1.2-SNAPSHOT</version>
     <name>Orefinder</name>
     <packaging>jar</packaging>
-    <url>http://mystikos.org</url>
+    <url>https://github.com/mark-iid/orefinder</url>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
@@ -38,6 +38,7 @@
         </repository>
     </repositories>
     <dependencies>
+        <!-- MockBukkit -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
             <artifactId>mockbukkit-v1.21</artifactId>
