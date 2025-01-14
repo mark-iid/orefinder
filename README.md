@@ -1,4 +1,4 @@
-[![Java CI with Maven](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml/badge.svg)](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml)
 
 # Orefinder Plugin
 
