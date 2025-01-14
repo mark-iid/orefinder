@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml/badge.svg)](https://github.com/mark-iid/orefinder/actions/workflows/maven.yml)
+
 # Orefinder Plugin
 
 Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items.
