@@ -52,7 +52,7 @@ jobs:
             distribution: 'temurin'
             cache: maven
         - run: mvn -B package --file pom.xml -DskipTests
-        - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+        - run: mkdir staging && cp target/*.jar staging
         - uses: actions/upload-artifact@v4
           with:
             name: Package
