@@ -2,6 +2,7 @@ package org.mystikos.minecraft.orefinder;
 
 import java.util.List;
 
+
 /**
  * The ItemConf class handles the configuration for items in the OreFinder plugin.
  * It initializes the configuration and provides methods to retrieve ore IDs based on items in hand.
@@ -11,7 +12,7 @@ class ItemConf {
     /**
      * Reference to the main plugin class.
      */
-    private final Orefinder plugin;
+    private final OrefinderContext plugin;
 
     /**
      * Array of item IDs that the player can hold in hand.
@@ -33,7 +34,7 @@ class ItemConf {
      *
      * @param plugin The main plugin instance.
      */
-    ItemConf(Orefinder plugin) {
+    ItemConf(OrefinderContext plugin) {
         this.plugin = plugin;
     }
 

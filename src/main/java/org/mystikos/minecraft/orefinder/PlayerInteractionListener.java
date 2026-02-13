@@ -22,7 +22,7 @@ import java.util.Random;
  */
 class PlayerInteractionListener implements Listener {
 
-    private final Orefinder plugin;
+    private final OrefinderContext plugin;
     private final ItemConf ic;
     private PlayerCD pcdm;
 
@@ -31,7 +31,7 @@ class PlayerInteractionListener implements Listener {
      *
      * @param plugin The Orefinder plugin instance.
      */
-    public PlayerInteractionListener(Orefinder plugin) {
+    public PlayerInteractionListener(OrefinderContext plugin) {
         this.plugin = plugin;
         this.ic = new ItemConf(this.plugin);
     }

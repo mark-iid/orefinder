@@ -1,6 +1,7 @@
 package org.mystikos.minecraft.orefinder;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,9 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrefinderTest {
@@ -19,6 +23,7 @@ public class OrefinderTest {
     private ServerMock server;
     private WorldMock world;
     private PlayerMock player;
+    private PlayerInteractionListener listener;
 
     @BeforeEach
     public void setUp() {
@@ -26,13 +31,42 @@ public class OrefinderTest {
         server = MockBukkit.mock();
         server.setMaxPlayers(1);
         System.out.println("Loading plugin");
-        Orefinder orefinder = MockBukkit.load(Orefinder.class);
-        PlayerInteractionListener listener = new PlayerInteractionListener(orefinder);
+        OrefinderContext context = createTestContext();
+        listener = new PlayerInteractionListener(context);
         listener.init();
         System.out.println("Creating world");
         world = new WorldMock(Material.STONE, 100, 50);
         System.out.println("Adding player");
         player = server.addPlayer();
+        player.setOp(true);
+    }
+
+    private OrefinderContext createTestContext() {
+        YamlConfiguration config = new YamlConfiguration();
+        config.set("text.oneblock_hot", "One block away!");
+        config.set("text.very_hot", "Very hot!");
+        config.set("text.hot", "Hot!");
+        config.set("text.warm", "Warm!");
+        config.set("text.lukewarm", "Lukewarm.");
+        config.set("text.cold", "Cold.");
+        config.set("text.very_cold", "Ice cold!");
+        config.set("text.ender_steal", "An enderman stole your block!");
+        config.set("chance.steal_block", 48);
+        config.set("functions.block_stealing", false);
+        config.set("indicate.inhand", List.of("diamond", "emerald", "ancient_debris"));
+        config.set("indicate.lookfor", List.of("diamond_ore", "emerald_ore", "ancient_debris"));
+        Logger logger = Logger.getLogger("OrefinderTest");
+        return new OrefinderContext() {
+            @Override
+            public YamlConfiguration getConfig() {
+                return config;
+            }
+
+            @Override
+            public Logger getLogger() {
+                return logger;
+            }
+        };
     }
 
     @AfterEach
@@ -52,7 +86,7 @@ public class OrefinderTest {
 
         // Simulate hitting a stone block
         PlayerInteractEvent event = new PlayerInteractEvent(player, Action.LEFT_CLICK_BLOCK, diamond, world.getBlockAt(player.getLocation().add(1, 0, 0)), null);
-        server.getPluginManager().callEvent(event);
+        listener.onPlayerInteract(event);
 
         String expectedMessage = "Ice cold!";
         String message = player.nextMessage();
@@ -76,7 +110,7 @@ public class OrefinderTest {
 
         // Simulate hitting a stone block
         PlayerInteractEvent event = new PlayerInteractEvent(player, Action.LEFT_CLICK_BLOCK, diamond, world.getBlockAt(player.getLocation().add(1, 0, 0)), null);
-        server.getPluginManager().callEvent(event);
+        listener.onPlayerInteract(event);
         // Verify the expected message
         String expectedMessage = "Very hot!";
         String message = player.nextMessage();
@@ -99,7 +133,7 @@ public class OrefinderTest {
 
         // Simulate hitting a stone block
         PlayerInteractEvent event = new PlayerInteractEvent(player, Action.LEFT_CLICK_BLOCK, diamond, world.getBlockAt(player.getLocation().add(1, 0, 0)), null);
-        server.getPluginManager().callEvent(event);
+        listener.onPlayerInteract(event);
         // Verify the expected message
         String expectedMessage = "Hot!";
         String message = player.nextMessage();
@@ -118,7 +152,7 @@ public class OrefinderTest {
         ItemStack ironIngot = new ItemStack(Material.IRON_INGOT);
         player.getInventory().setItemInMainHand(ironIngot);
         PlayerInteractEvent event = new PlayerInteractEvent(player, Action.LEFT_CLICK_BLOCK, ironIngot, world.getBlockAt(player.getLocation().add(1, 0, 0)), null);
-        server.getPluginManager().callEvent(event);
+        listener.onPlayerInteract(event);
         String message = player.nextMessage();
         player.kick();
         // Verify no message is sent

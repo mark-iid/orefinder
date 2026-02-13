@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * The Orefinder class extends JavaPlugin and represents the main class for the OreFinder plugin.
  * It handles the enabling and disabling of the plugin, as well as initializing necessary components.
  */
-public class Orefinder extends JavaPlugin {
+public class Orefinder extends JavaPlugin implements OrefinderContext {
     /**
      * Instance of RCHPlayerInteract to handle player interactions.
      */
