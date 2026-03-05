@@ -359,7 +359,7 @@ public class OrefinderTest {
         PlayerInteractEvent event = new PlayerInteractEvent(player, Action.LEFT_CLICK_BLOCK, diamond,
                 world.getBlockAt(player.getLocation().add(1, 0, 0)), null);
         stealingListener.onPlayerInteract(event);
-        assertEquals(2, diamond.getAmount(), "Diamond stack should be decremented from 3 to 2 after stealing");
+        assertEquals(2, player.getInventory().getItemInMainHand().getAmount(), "Diamond stack should be decremented from 3 to 2 after stealing");
     }
 
     // ===== getBlockTypeDistance EDGE CASE TESTS =====
