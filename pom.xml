@@ -50,6 +50,14 @@
         </repository>
     </repositories>
     <dependencies>
+        <!-- Force commons-lang3 upgrade to fix CVE-2025-48924 (transitive via MockBukkit) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.20.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- MockBukkit -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
