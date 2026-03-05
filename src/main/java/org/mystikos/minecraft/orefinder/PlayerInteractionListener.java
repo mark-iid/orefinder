@@ -85,7 +85,9 @@ class PlayerInteractionListener implements Listener {
      * @return True if the block matches the specified type, false otherwise.
      */
     private boolean isMatchingBlock(World world, double x, double y, double z, String stid) {
-        return world.getBlockAt((int) x, (int) y, (int) z).getType().toString().equalsIgnoreCase(stid);
+        int iy = (int) y;
+        if (iy < world.getMinHeight() || iy >= world.getMaxHeight()) return false;
+        return world.getBlockAt((int) x, iy, (int) z).getType().toString().equalsIgnoreCase(stid);
     }
 
     /**
@@ -180,6 +182,7 @@ class PlayerInteractionListener implements Listener {
                 int amount = holding.getAmount();
                 if (amount > 1) {
                     holding.setAmount(amount - 1);
+                    player.getInventory().setItemInMainHand(holding);
                 } else {
                     player.getInventory().setItemInMainHand(null);
                 }
