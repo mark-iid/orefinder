@@ -18,6 +18,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -248,23 +249,25 @@ public class OrefinderTest {
 
     @Test
     public void testCooldownAllowsFirstUse() {
-        PlayerInteractionListener.PlayerCD pcd = new PlayerInteractionListener.PlayerCD(10);
-        assertTrue(pcd.getUseRight(1), "First use should be allowed");
+        PlayerCooldownManager pcm = new PlayerCooldownManager();
+        assertTrue(pcm.canUse(UUID.randomUUID()), "First use should be allowed");
     }
 
     @Test
     public void testCooldownPreventsImmediateSecondUse() {
-        PlayerInteractionListener.PlayerCD pcd = new PlayerInteractionListener.PlayerCD(10);
-        pcd.getUseRight(1);
-        assertFalse(pcd.getUseRight(1), "Immediate second use should be blocked by the 1-second cooldown");
+        PlayerCooldownManager pcm = new PlayerCooldownManager();
+        UUID playerId = UUID.randomUUID();
+        pcm.canUse(playerId);
+        assertFalse(pcm.canUse(playerId), "Immediate second use should be blocked by the 1-second cooldown");
     }
 
     @Test
-    public void testCooldownBlocksWhenAtCapacity() {
-        // Only 1 slot; after player 1 fills it, player 2 cannot get a record
-        PlayerInteractionListener.PlayerCD pcd = new PlayerInteractionListener.PlayerCD(1);
-        pcd.getUseRight(1);
-        assertFalse(pcd.getUseRight(2), "New player should be blocked when cooldown array is at capacity");
+    public void testCooldownAllowsUnlimitedPlayers() {
+        // HashMap-backed manager has no fixed capacity — every new player gets a record
+        PlayerCooldownManager pcm = new PlayerCooldownManager();
+        assertTrue(pcm.canUse(UUID.randomUUID()), "First new player should be allowed");
+        assertTrue(pcm.canUse(UUID.randomUUID()), "Second new player should also be allowed (no capacity limit)");
+        assertTrue(pcm.canUse(UUID.randomUUID()), "Third new player should also be allowed (no capacity limit)");
     }
 
     @Test
