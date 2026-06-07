@@ -47,11 +47,12 @@ The plugin provides a configuration file `config.yml` where you can customize va
 
 ## Commands
 
-No commands are provided by this plugin.
+- `/orefinder reload`: Reloads `config.yml` from disk and rebuilds the item/ore mappings without restarting the server. Requires the `orefinder.reload` permission.
 
 ## Permissions
 
-- `orefinder.use`: Allows the player to use the Orefinder functionality.
+- `orefinder.use`: Allows the player to use the Orefinder functionality. Default: everyone.
+- `orefinder.reload`: Allows reloading the configuration via `/orefinder reload`. Default: operators.
 
 ## Development
 

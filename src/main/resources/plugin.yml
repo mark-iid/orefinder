@@ -1,12 +1,20 @@
 name: OreFinder
 main: org.mystikos.minecraft.orefinder.Orefinder
-version: 1.0
+version: ${project.version}
 api-version: 1.13
+commands:
+    orefinder:
+        description: OreFinder administration commands.
+        usage: /orefinder reload
 permissions:
     orefinder.*:
         description: Gives access to all OreFinder feature
         children:
             orefinder.use: true
+            orefinder.reload: true
     orefinder.use:
         default: true
         description: Allows you to use OreFinder
+    orefinder.reload:
+        default: op
+        description: Allows reloading the OreFinder configuration
