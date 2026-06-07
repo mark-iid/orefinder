@@ -1,0 +1,26 @@
+# Dependabot configuration: opens pull requests to keep dependencies current
+# and to surface vulnerable transitive dependencies automatically.
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates
+version: 2
+updates:
+  # Maven dependencies (including the test-scoped transitives where the
+  # plexus-utils and commons-lang3 CVEs were found)
+  - package-ecosystem: maven
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      maven-dependencies:
+        patterns:
+          - "*"
+
+  # GitHub Actions used by the CI workflow
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
