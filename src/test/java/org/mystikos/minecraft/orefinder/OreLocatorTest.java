@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,13 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class OreLocatorTest {
 
-    private ServerMock server;
     private WorldMock world;
     private final OreLocator locator = new OreLocator();
 
     @BeforeEach
     public void setUp() {
-        server = MockBukkit.mock();
+        MockBukkit.mock();
         world = new WorldMock(Material.STONE, 100, 50);
     }
 

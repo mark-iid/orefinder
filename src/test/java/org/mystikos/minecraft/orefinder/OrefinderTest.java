@@ -282,7 +282,7 @@ public class OrefinderTest {
         player.nextMessage(); // consume the first message
 
         // Simulate the player quitting — this should clear their cooldown record
-        PlayerQuitEvent quitEvent = new PlayerQuitEvent(player, Component.empty());
+        PlayerQuitEvent quitEvent = new PlayerQuitEvent(player, Component.empty(), PlayerQuitEvent.QuitReason.DISCONNECTED);
         listener.onPlayerQuitEvent(quitEvent);
 
         // After rejoining (new record), the player should be able to use the detector again
