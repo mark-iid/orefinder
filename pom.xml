@@ -67,6 +67,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Force plexus-utils upgrade to fix CVE-2025-67030 (transitive via MockBukkit) -->
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>3.6.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- MockBukkit -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
