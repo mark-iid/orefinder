@@ -1,0 +1,56 @@
+{
+	"name": "Orefinder (Spigot Plugin — Java 21 / Maven)",
+	"image": "mcr.microsoft.com/devcontainers/java:21-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "true",
+			"mavenVersion": "latest"
+		},
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "lts"
+		},
+		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"redhat.java",
+				"vscjava.vscode-java-debug",
+				"vscjava.vscode-java-test",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-java-dependency",
+				"redhat.vscode-yaml",
+				"anthropic.claude-code",
+				"github.vscode-github-actions",
+				"eamodio.gitlens",
+				"streetsidesoftware.code-spell-checker"
+			],
+			"settings": {
+				"java.compile.nullAnalysis.mode": "automatic",
+				"java.configuration.updateBuildConfiguration": "automatic",
+				"java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+				"java.configuration.runtimes": [
+					{
+						"name": "JavaSE-21",
+						"path": "/usr/local/sdkman/candidates/java/current",
+						"default": true
+					}
+				],
+				"maven.executable.preferMavenWrapper": false,
+				"editor.formatOnSave": false,
+				"files.eol": "\n"
+			}
+		}
+	},
+	"forwardPorts": [25565],
+	"portsAttributes": {
+		"25565": {
+			"label": "Minecraft Server",
+			"onAutoForward": "silent"
+		}
+	},
+	"postCreateCommand": "mvn -B dependency:go-offline -DskipTests || true",
+	"remoteUser": "vscode"
+}
