@@ -4,7 +4,7 @@ A ready-to-code environment for the Orefinder Spigot plugin.
 
 ## What's inside
 
-- **Java 21 (Temurin)** via the base image + `java` feature, matching the `pom.xml` compile target.
+- **Java 25 (Temurin)** via the base image + `java` feature, matching the `pom.xml` compile target.
 - **Maven** (latest) for building (`mvn package`) and running tests (MockBukkit + JUnit 5).
 - **Node.js LTS** — required by the Claude Code CLI.
 - **Claude Code CLI** via the official Anthropic dev container feature.

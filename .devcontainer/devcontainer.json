@@ -1,6 +1,6 @@
 {
-	"name": "Orefinder (Spigot Plugin — Java 21 / Maven)",
-	"image": "mcr.microsoft.com/devcontainers/java:21-bookworm",
+	"name": "Orefinder (Spigot Plugin — Java 25 / Maven)",
+	"image": "mcr.microsoft.com/devcontainers/java:25-bookworm",
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
 			"version": "none",
@@ -33,7 +33,7 @@
 				"java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
 				"java.configuration.runtimes": [
 					{
-						"name": "JavaSE-21",
+						"name": "JavaSE-25",
 						"path": "/usr/lib/jvm/msopenjdk-current",
 						"default": true
 					}
