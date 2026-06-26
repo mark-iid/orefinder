@@ -14,8 +14,8 @@ Orefinder was forked from https://www.curseforge.com/minecraft/bukkit-plugins/or
 
 ## Requirements
 
-- Minecraft server with Bukkit/Spigot/Paper
-- Java 21 or higher
+- Minecraft 26.2 server with Bukkit/Spigot/Paper
+- Java 25 or higher
 - Maven
 
 ## Installation
@@ -58,7 +58,7 @@ The plugin provides a configuration file `config.yml` where you can customize va
 
 ### Prerequisites
 
-- Java 21 or higher
+- Java 25 or higher
 - Maven
 
 ### Running Tests
