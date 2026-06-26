@@ -14,6 +14,11 @@ updates:
       maven-dependencies:
         patterns:
           - "*"
+    ignore:
+      # plexus-utils is pinned to 3.6.x to stay compatible with the
+      # maven-resolver MockBukkit uses (see pom.xml). 4.x breaks MockBukkit.load().
+      - dependency-name: "org.codehaus.plexus:plexus-utils"
+        update-types: ["version-update:semver-major"]
 
   # GitHub Actions used by the CI workflow
   - package-ecosystem: github-actions

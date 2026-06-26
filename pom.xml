@@ -67,11 +67,18 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Force plexus-utils upgrade to fix CVE-2025-67030 (transitive via MockBukkit) -->
+        <!--
+            Force plexus-utils upgrade to fix CVE-2025-67030 (transitive via MockBukkit).
+            Pinned to the 3.6.x line: plexus-utils 4.x has breaking changes incompatible
+            with the maven-resolver-provider 3.8.5 MockBukkit uses to build its plugin
+            LibraryLoader, leaving the Aether RepositorySystem null and failing
+            MockBukkit.load() with an NPE. 3.6.1 already remediates the CVE — do not bump
+            to 4.x until MockBukkit ships a newer maven-resolver.
+        -->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
-            <version>4.0.3</version>
+            <version>3.6.1</version>
             <scope>test</scope>
         </dependency>
 
