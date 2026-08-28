@@ -78,15 +78,17 @@
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
-            <version>3.6.1</version>
+            <version>3.6.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- MockBukkit (v26.1.2 is the latest published module; compatible with the 26.2 API) -->
+        <!-- MockBukkit: use the module matching the Paper/MC line below. The module
+             bundles registry data for its exact MC version, so it must be kept in
+             lockstep with paper-api or RegistryAccessMock fails to initialize. -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
-            <artifactId>mockbukkit-v26.1.2</artifactId>
-            <version>4.113.3</version>
+            <artifactId>mockbukkit-v26.2</artifactId>
+            <version>4.116.1</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -94,13 +96,13 @@
             (ServerMock, PlayerMock, WorldMock) extend Paper API types, so the test
             sources cannot compile without it. The shipped plugin still targets the
             Spigot API below. Declared before spigot-api so its superset classes win
-            on the test classpath. Paper 26.2 is alpha-only, so the 26.1.2 stable line
-            (matching the mockbukkit-v26.1.2 module) is used for tests.
+            on the test classpath. Pinned to the same MC line as the mockbukkit
+            module above (26.2) and as the spigot-api below.
         -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.1.2.build.72-stable</version>
+            <version>26.2.build.115-stable</version>
             <scope>test</scope>
         </dependency>
         <!--Spigot API-->
@@ -114,19 +116,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>6.1.0</version>
+            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>6.1.0</version>
+            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>6.1.0</version>
+            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
