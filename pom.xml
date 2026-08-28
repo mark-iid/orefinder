@@ -59,6 +59,21 @@
         </repository>
     </repositories>
     <dependencies>
+        <!--
+            Force log4j-api upgrade to fix CVE-2026-49844 (transitive via paper-api).
+            Paper 26.2 build.117 still resolves 2.26.0; 2.26.1 is a patch on the same
+            line. Not reachable from this plugin (test scope only, nothing is bundled
+            into the shipped jar, and the plugin logs via java.util.logging), but pinned
+            to keep the Dependabot alert list clean. Remove once paper-api ships
+            log4j-api >= 2.26.1 of its own accord.
+        -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.26.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Force commons-lang3 upgrade to fix CVE-2025-48924 (transitive via MockBukkit) -->
         <dependency>
             <groupId>org.apache.commons</groupId>
