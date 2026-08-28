@@ -11,9 +11,26 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
+      # Deps that must move in lockstep with the Minecraft version. Bumping the
+      # MC line also means changing the mockbukkit artifactId (the module is
+      # named mockbukkit-v<mc-version> and bundles registry data for exactly
+      # that version), which Dependabot cannot do — it only bumps versions.
+      # These therefore get their own PR that is expected to need a manual
+      # follow-up, and cannot hold up the self-contained updates below.
+      minecraft-api:
+        patterns:
+          - "io.papermc.paper:*"
+          - "org.spigotmc:*"
+          - "org.mockbukkit.mockbukkit:*"
+      # Everything else: test/build libraries and the CVE remediation pins.
+      # Self-contained bumps that should flow through on their own.
       maven-dependencies:
         patterns:
           - "*"
+        exclude-patterns:
+          - "io.papermc.paper:*"
+          - "org.spigotmc:*"
+          - "org.mockbukkit.mockbukkit:*"
     ignore:
       # plexus-utils is pinned to 3.6.x to stay compatible with the
       # maven-resolver MockBukkit uses (see pom.xml). 4.x breaks MockBukkit.load().
