@@ -61,7 +61,7 @@
     <dependencies>
         <!--
             Force log4j-api upgrade to fix CVE-2026-49844 (transitive via paper-api).
-            Paper 26.2 build.117 still resolves 2.26.0; 2.26.1 is a patch on the same
+            Paper 26.3 build.253 still resolves 2.26.0; 2.26.1 is a patch on the same
             line. Not reachable from this plugin (test scope only, nothing is bundled
             into the shipped jar, and the plugin logs via java.util.logging), but pinned
             to keep the Dependabot alert list clean. Remove once paper-api ships
@@ -102,8 +102,8 @@
              lockstep with paper-api or RegistryAccessMock fails to initialize. -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
-            <artifactId>mockbukkit-v26.2</artifactId>
-            <version>4.116.1</version>
+            <artifactId>mockbukkit-v26.3</artifactId>
+            <version>4.121.0</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -112,19 +112,19 @@
             sources cannot compile without it. The shipped plugin still targets the
             Spigot API below. Declared before spigot-api so its superset classes win
             on the test classpath. Pinned to the same MC line as the mockbukkit
-            module above (26.2) and as the spigot-api below.
+            module above (26.3) and as the spigot-api below.
         -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.2.build.127-stable</version>
+            <version>26.3.build.253-stable</version>
             <scope>test</scope>
         </dependency>
         <!--Spigot API-->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>26.2-R0.1-SNAPSHOT</version>
+            <version>26.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!-- JUnit dependency -->

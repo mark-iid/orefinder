@@ -5,7 +5,7 @@
 [![Latest release](https://img.shields.io/github/v/release/mark-iid/orefinder)](https://github.com/mark-iid/orefinder/releases)
 [![License: GPL-3.0](https://img.shields.io/github/license/mark-iid/orefinder)](LICENSE.md)
 [![Java 25](https://img.shields.io/badge/Java-25-orange)](https://openjdk.org/projects/jdk/25/)
-[![Minecraft 26.2](https://img.shields.io/badge/Minecraft-26.2-brightgreen)](https://www.minecraft.net/)
+[![Minecraft 26.3](https://img.shields.io/badge/Minecraft-26.3-brightgreen)](https://www.minecraft.net/)
 
 Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items. Hold a diamond and punch a wall — the plugin tells you how close the nearest diamond ore is.
 
@@ -41,7 +41,7 @@ The distance is mapped to a message from `config.yml`:
 
 ## Requirements
 
-- A Minecraft **26.2** server running Bukkit, Spigot, or Paper (`api-version: '26.2'`)
+- A Minecraft **26.3** server running Bukkit, Spigot, or Paper (`api-version: '26.3'`)
 - **Java 25** or higher
 - Maven (to build from source)
 
@@ -171,7 +171,7 @@ src/test/java/org/mystikos/minecraft/orefinder/
 ### Dependencies
 
 Only `spigot-api` is `provided` — nothing is shaded into the shipped jar. `paper-api` and
-`mockbukkit-v26.2` are test-scoped and must stay on the same Minecraft line as each other,
+`mockbukkit-v26.3` are test-scoped and must stay on the same Minecraft line as each other,
 since the MockBukkit module bundles registry data for exactly its version. A few
 transitive dependencies are pinned in `pom.xml` for CVE remediation; the comments there
 explain why each pin exists and when it can be removed.

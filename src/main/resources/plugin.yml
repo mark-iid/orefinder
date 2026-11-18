@@ -1,7 +1,7 @@
 name: OreFinder
 main: org.mystikos.minecraft.orefinder.Orefinder
 version: ${project.version}
-api-version: '26.2'
+api-version: '26.3'
 commands:
     orefinder:
         description: OreFinder administration commands.
