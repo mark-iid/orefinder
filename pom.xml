@@ -61,7 +61,7 @@
     <dependencies>
         <!--
             Force log4j-api upgrade to fix CVE-2026-49844 (transitive via paper-api).
-            Paper 26.3 build.253 still resolves 2.26.0; 2.26.1 is a patch on the same
+            Paper 26.3 build.200 still resolves 2.26.0; 2.26.1 is a patch on the same
             line. Not reachable from this plugin (test scope only, nothing is bundled
             into the shipped jar, and the plugin logs via java.util.logging), but pinned
             to keep the Dependabot alert list clean. Remove once paper-api ships
@@ -111,13 +111,21 @@
             (ServerMock, PlayerMock, WorldMock) extend Paper API types, so the test
             sources cannot compile without it. The shipped plugin still targets the
             Spigot API below. Declared before spigot-api so its superset classes win
-            on the test classpath. Pinned to the same MC line as the mockbukkit
-            module above (26.3) and as the spigot-api below.
+            on the test classpath. Pinned to the exact paper build MockBukkit was
+            compiled against, not merely the same MC line: RegistryAccessMock checks
+            paper-api's registry list against registry data bundled in the mockbukkit
+            jar, so a newer paper build fails every MockBukkit test with
+            "Null JSON element while retrieving `<registry>` - MockBukkit / MC version
+            mismatch?". mockbukkit-v26.3 4.121.0 targets 26.3.build.200-stable. To find
+            that value for a future module, read the string embedded in MockBukkit's
+            IncompatiblePaperVersionException — the jar's version_info.properties ships
+            unresolved Gradle placeholders and is useless. Bump this only in step with
+            the mockbukkit module above.
         -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.3.build.253-stable</version>
+            <version>26.3.build.200-stable</version>
             <scope>test</scope>
         </dependency>
         <!--Spigot API-->

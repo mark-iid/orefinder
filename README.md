@@ -171,8 +171,10 @@ src/test/java/org/mystikos/minecraft/orefinder/
 ### Dependencies
 
 Only `spigot-api` is `provided` — nothing is shaded into the shipped jar. `paper-api` and
-`mockbukkit-v26.3` are test-scoped and must stay on the same Minecraft line as each other,
-since the MockBukkit module bundles registry data for exactly its version. A few
+`mockbukkit-v26.3` are test-scoped and must stay in lockstep: `paper-api` is pinned to
+the exact build MockBukkit was compiled against (`26.3.build.200-stable` for mockbukkit
+4.121.0), because the module bundles registry data for that build and a newer paper build
+fails every MockBukkit test. A few
 transitive dependencies are pinned in `pom.xml` for CVE remediation; the comments there
 explain why each pin exists and when it can be removed.
 
