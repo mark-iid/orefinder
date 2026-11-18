@@ -97,6 +97,30 @@
             <scope>test</scope>
         </dependency>
 
+        <!--
+            Force guava upgrade to fix CVE-2026-102554 (transitive via paper-api).
+            paper-api 26.3 resolves guava 33.6.0-jre, which falls in the vulnerable
+            range for GHSA-xxph-c9ww-hj94: deserializing CompactHashMap, CompactHashSet
+            or MapMakerInternalMap triggers uncontrolled memory allocation. 33.7.2 is
+            the first fixed release; pinned to the current 33.8.0-jre.
+
+            Not reachable from this plugin: the dependency arrives transitively through
+            test-scoped paper-api, nothing in src/main or src/test references
+            com.google.common, the shipped jar bundles no third-party classes, and the
+            plugin deserializes nothing. Pinned anyway to keep the Dependabot alert
+            list meaningful, matching the log4j-api, commons-lang3 and plexus-utils
+            pins above. Test scope is safe precisely because no project code uses it;
+            at runtime the server supplies guava alongside the provided Spigot API.
+
+            Remove once paper-api ships guava >= 33.7.2 on its own.
+        -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.8.0-jre</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- MockBukkit: use the module matching the Paper/MC line below. The module
              bundles registry data for its exact MC version, so it must be kept in
              lockstep with paper-api or RegistryAccessMock fails to initialize. -->
