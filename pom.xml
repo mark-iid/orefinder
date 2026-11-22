@@ -40,6 +40,35 @@
                     </includes>
                 </configuration>
             </plugin>
+            <!--
+                maven-resources-plugin and maven-jar-plugin are pinned even though
+                nothing here configures them, because the jar lifecycle binds them
+                whether we declare them or not. Left undeclared, their versions come
+                from whatever Maven the GitHub runner image happens to ship. That
+                makes the build non-reproducible across image bumps, and it defeats
+                the ~/.m2 actions/cache: a cache restored from this pom's hash still
+                misses a plugin whose version was decided elsewhere, forcing a Maven
+                Central fetch every time the image moves. Run 44983978382 died that
+                way, taking an HTTP 429 from Central while resolving
+                maven-resources-plugin 3.4.0 (the Maven 3.9.15 default) with a fully
+                restored cache already on disk.
+
+                install and deploy are deliberately left unpinned: CI runs only as
+                far as `package`, so those phases never execute here.
+
+                Bump these on their own schedule. Nothing in this build depends on
+                their behaviour, only on their version being ours to state.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
         </plugins>
     </build>
     <properties>
