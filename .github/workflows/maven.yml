@@ -39,7 +39,20 @@ jobs:
         restore-keys: ${{ runner.os }}-maven
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      # Maven Central answers with HTTP 429 under load. Resolver already retries
+      # those (retryHandler.serviceUnavailable defaults to "429,503"), but only
+      # count=3 at a 5s/10s/15s backoff, so a burst wider than ~30s fails the
+      # build -- which is exactly how run 44983978382 died resolving
+      # maven-resources-plugin. 6 gives ~105s of cover.
+      #
+      # Both spellings are set deliberately: Resolver 1.x (Maven 3.9.x, what the
+      # runner image ships) reads aether.connector.*, Resolver 2.x (Maven 4)
+      # reads aether.transport.*, and each ignores the other's name silently
+      # rather than erroring. Do not drop one until the runner's Maven is pinned.
+      run: >-
+        mvn -B package --file pom.xml
+        -Daether.connector.http.retryHandler.count=6
+        -Daether.transport.http.retryHandler.count=6
 
   publish-job:
       runs-on: ubuntu-latest
@@ -51,7 +64,11 @@ jobs:
             java-version: '25'
             distribution: 'temurin'
             cache: maven
-        - run: mvn -B package --file pom.xml -DskipTests
+        # Retry flags as in the build job above; see the rationale there.
+        - run: >-
+            mvn -B package --file pom.xml -DskipTests
+            -Daether.connector.http.retryHandler.count=6
+            -Daether.transport.http.retryHandler.count=6
         - run: mkdir staging && cp target/*.jar staging
         - uses: actions/upload-artifact@v7
           with:
