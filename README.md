@@ -7,14 +7,14 @@
 [![Java 25](https://img.shields.io/badge/Java-25-orange)](https://openjdk.org/projects/jdk/25/)
 [![Minecraft 26.3](https://img.shields.io/badge/Minecraft-26.3-brightgreen)](https://www.minecraft.net/)
 
-Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items. Hold a diamond and punch a wall — the plugin tells you how close the nearest diamond ore is.
+Orefinder is a Minecraft plugin that helps players locate ores by providing distance-based clues when they hit blocks while holding specific items. Hold a diamond and punch a wall, and the plugin tells you how close the nearest diamond ore is.
 
 Orefinder was forked from https://www.curseforge.com/minecraft/bukkit-plugins/orefinder-bukkit which appears to have been abandoned.
 
 ## Features
 
 - Reports the distance to the nearest configured ore block as a "hot/cold" chat message.
-- Configurable item-to-ore pairings — any held item can point at any block type.
+- Configurable item-to-ore pairings (any held item can point at any block type).
 - Per-player cooldown of one lookup per second, so the search cannot be spammed.
 - Optional block-stealing "enderman" mechanic with a configurable chance.
 - `/orefinder reload` to reload `config.yml` at runtime without restarting the server.
@@ -107,7 +107,7 @@ indicate:
 | Setting | Description |
 | ------- | ----------- |
 | `text.*` | Messages sent to the player for each distance band (see the table above). |
-| `chance.steal_block` | Denominator of the steal chance — `48` means a 1-in-48 chance on each lookup. |
+| `chance.steal_block` | Denominator of the steal chance. `48` means a 1-in-48 chance on each lookup. |
 | `functions.block_stealing` | Enables the enderman mechanic: on a successful roll the player takes 1 damage and, in survival mode, loses one of the held items. |
 | `indicate.inhand` | Items that activate the detector when held in the main hand. |
 | `indicate.lookfor` | Block types to search for. |
@@ -170,7 +170,7 @@ src/test/java/org/mystikos/minecraft/orefinder/
 
 ### Dependencies
 
-Only `spigot-api` is `provided` — nothing is shaded into the shipped jar. `paper-api` and
+Only `spigot-api` is `provided`, so nothing is shaded into the shipped jar. `paper-api` and
 `mockbukkit-v26.3` are test-scoped and must stay in lockstep: `paper-api` is pinned to
 the exact build MockBukkit was compiled against (`26.3.build.200-stable` for mockbukkit
 4.121.0), because the module bundles registry data for that build and a newer paper build
